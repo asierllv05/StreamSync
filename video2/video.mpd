@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" profiles="urn:mpeg:dash:profile:isoff-on-demand:2011" minBufferTime="PT3.00S" mediaPresentationDuration="PT3M13.042S" type="static">
+  <!-- Created with Bento4 mp4-dash.py, VERSION=2.0.0-641 -->
+  <Period>
+    <!-- Video -->
+    <AdaptationSet mimeType="video/mp4" segmentAlignment="true" startWithSAP="1" maxWidth="1280" maxHeight="720" subsegmentAlignment="true" subsegmentStartsWithSAP="1">
+      <Representation id="video-avc1-1" codecs="avc1.64001E" width="640" height="360" scanType="progressive" frameRate="24" bandwidth="115953">
+        <BaseURL>media-video-avc1-1.mp4</BaseURL>
+        <SegmentBase indexRange="757-1568">
+          <Initialization range="0-756"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="video-avc1-2" codecs="avc1.64001F" width="960" height="540" scanType="progressive" frameRate="24" bandwidth="705455">
+        <BaseURL>media-video-avc1-2.mp4</BaseURL>
+        <SegmentBase indexRange="757-1568">
+          <Initialization range="0-756"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="video-avc1-3" codecs="avc1.64001F" width="1280" height="720" scanType="progressive" frameRate="24" bandwidth="2589112">
+        <BaseURL>media-video-avc1-3.mp4</BaseURL>
+        <SegmentBase indexRange="754-1565">
+          <Initialization range="0-753"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+    <!-- Audio -->
+    <AdaptationSet mimeType="audio/mp4" startWithSAP="1" segmentAlignment="true" lang="en" subsegmentAlignment="true" subsegmentStartsWithSAP="1">
+      <Representation id="audio-en-mp4a.40.2" codecs="mp4a.40.2" bandwidth="128593" audioSamplingRate="44100">
+        <AudioChannelConfiguration schemeIdUri="urn:mpeg:mpegB:cicp:ChannelConfiguration" value="2"/>
+        <BaseURL>media-audio-en-mp4a.40.2.mp4</BaseURL>
+        <SegmentBase indexRange="631-1442">
+          <Initialization range="0-630"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>
