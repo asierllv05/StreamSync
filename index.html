@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamSync - Premium</title>
+    <!-- Google Fonts: Outfit for a modern, sleek look -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Design Elements -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="main-nav" style="display: none;">
+        <div class="logo">
+            <i class="fa-solid fa-play"></i>
+            <span>Stream<span class="highlight">Sync</span></span>
+        </div>
+        <ul class="nav-links">
+            <li class="active" data-target="home-view">Inicio</li>
+            <li data-target="party-view">Salas Colectivas</li>
+            <li data-target="leaderboard-view">Top Global</li>
+            <li data-target="recap-view">Mi Recap</li>
+        </ul>
+        <div class="user-profile" style="display: flex; align-items: center; gap: 1rem; position: relative;">
+            <div class="user-credits"
+                style="text-align: right; line-height: 1.2; background: rgba(236,72,153,0.1); padding: 0.3rem 0.8rem; border-radius: 20px; border: 1px solid rgba(236,72,153,0.3);">
+                <div style="font-weight: 600; color: #ec4899; font-size: 0.9rem;"><i class="fa-solid fa-coins"></i>
+                    <span id="credit-balance">150</span> Cr.
+                </div>
+            </div>
+            <div class="user-points" style="text-align: right; line-height: 1.2;">
+                <div style="font-size: 0.85rem; color: var(--text-muted);">Rango Plata</div>
+                <div style="font-weight: 600; color: var(--primary);"><i class="fa-solid fa-bolt"></i> 2,450 pts</div>
+            </div>
+            <div class="avatar-container" onclick="toggleProfileMenu()" style="cursor: pointer; position: relative;">
+                <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="User">
+                <i class="fa-solid fa-chevron-down"
+                    style="font-size: 0.7rem; color: #cbd5e1; position: absolute; bottom: 0; right: -10px;"></i>
+
+                <!-- Dropdown -->
+                <div id="profile-dropdown" class="profile-dropdown">
+                    <div class="dropdown-header">
+                        <strong>User Name</strong>
+                        <span>user@streamsync.com</span>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li data-target="profile-view"><a href="#"><i class="fa-solid fa-user"></i> Mi Perfil</a></li>
+                        <li data-target="friends-view"><a href="#"><i class="fa-solid fa-user-group"></i> Lista de
+                                Amigos</a></li>
+                        <li data-target="store-view"><a href="#"><i class="fa-solid fa-shop"></i> Tienda</a></li>
+                        <li data-target="plans-view"><a href="#"><i class="fa-solid fa-crown"></i> Gestionar Plan</a>
+                        </li>
+                        <li data-target="settings-view"><a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
+                        </li>
+                        <hr>
+                        <li><a href="#" style="color: #ef4444;"><i class="fa-solid fa-power-off"></i> Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container">
+
+        <!-- ==================== LOGIN VIEW ==================== -->
+        <section id="login-view" class="view active">
+            <div class="login-container"
+                style="max-width: 450px; margin: 4rem auto; padding: 3rem; background: var(--surface-color); border: 1px solid var(--surface-border); border-radius: 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+                <div class="logo" style="justify-content: center; margin-bottom: 2rem; font-size: 2rem;">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Stream<span class="highlight">Sync</span></span>
+                </div>
+                <h2 style="margin-bottom: 0.5rem;">Bienvenido de nuevo</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Inicia sesión para continuar viendo.</p>
+
+                <form id="login-form" onsubmit="handleLogin(event)"
+                    style="display: flex; flex-direction: column; gap: 1rem; text-align: left;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Correo Electrónico</label>
+                        <input type="email" id="login-email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Contraseña</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-top: 0.5rem;">
+                        <label style="display: flex; gap: 0.5rem; color: #cbd5e1; cursor: pointer;">
+                            <input type="checkbox"> Recordarme
+                        </label>
+                        <a href="#" style="color: var(--primary); text-decoration: none;">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary full-width mt-1"><i
+                            class="fa-solid fa-right-to-bracket"></i> Entrar a la Plataforma</button>
+
+                    <p style="text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                        ¿No tienes cuenta? <a href="#"
+                            style="color: var(--primary); text-decoration: none; font-weight: 600;">Regístrate</a>
+                    </p>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==================== HOME VIEW ==================== -->
+        <section id="home-view" class="view">
+            <div class="hero"
+                style="background: linear-gradient(to right, #0B0E14 20%, transparent), url('thumb_video1.png'); background-size: cover; background-position: center;">
+                <div class="hero-content">
+                    <span class="badge">NUEVO EPISODIO</span>
+                    <h1>WingIT</h1>
+                    <p>Un viaje audiovisual</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="openPlayer('video1/video.mpd')">
+                            <i class="fa-solid fa-play"></i> Reproducir Ahora
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fa-solid fa-plus"></i> Mi Lista
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Seguir Viendo</h2>
+            <div class="movie-grid">
+                <div class="movie-card">
+                    <div class="movie-poster"
+                        style="background: linear-gradient(to top, #000, transparent), url('thumb_video2.png'); background-size: cover; background-position: center;"
+                        onclick="openPlayer('video2/video.mpd')">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                    <div class="movie-info" onclick="openPlayer('video2/video.mpd')">
+                        <h3>Glass Half</h3>
+                        <p>Resolución 720p</p>
+                    </div>
+                </div>
+                <!-- More mock cards can go here -->
+            </div>
+        </section>
+
+        <!-- ==================== PLAYER VIEW (AD + MOVIE) ==================== -->
+        <section id="player-view" class="view">
+            <div class="video-container">
+
+                <!-- Ad overlay -->
+                <div id="ad-layer" class="player-layer active">
+                    <div class="ad-branding">Patrocinador</div>
+                    <div class="ad-message">
+                        <h2>Disfruta de tu película sin interrupciones</h2>
+                        <p>Este anuncio permite que tu película se reproduzca sin cortes publicitarios.</p>
+                    </div>
+                    <div class="ad-timer">
+                        El video comenzará en <span id="ad-countdown">5</span> segundos
+                    </div>
+                </div>
+
+                <!-- Main Movie overlay -->
+                <div id="movie-layer" class="player-layer" style="background: #000;">
+                    <button class="btn-close" onclick="closePlayer()"><i class="fa-solid fa-xmark"></i></button>
+
+                    <video id="main-video-player" style="width: 100%; height: 100%; object-fit: contain;" controls>
+                        Tu navegador no soporta el video HTML.
+                    </video>
+
+                    <!-- Interactive Popup Simulation -->
+                    <div id="interaction-popup" class="interaction-popup">
+                        <div class="interaction-content">
+                            <h4><i class="fa-solid fa-bolt"></i> Reacción Rápida</h4>
+                            <p>¿Qué te pareció esta revelación?</p>
+                            <div class="reaction-buttons">
+                                <button onclick="claimPoints(50)">🤯 Brutal</button>
+                                <button onclick="claimPoints(50)">😴 Predecible</button>
+                                <button onclick="claimPoints(50)">🤔 Confuso</button>
+                            </div>
+                            <div class="interaction-timer">Tiempo restante: <span id="interaction-timer">10</span>s
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== RECAP VIEW ==================== -->
+        <section id="recap-view" class="view">
+            <div class="recap-header">
+                <h2>Tu Stream<span class="highlight">Sync</span> Rewind</h2>
+                <p>Resumen Mensual - Noviembre</p>
+            </div>
+
+            <div class="recap-dashboard">
+                <div class="recap-card highlight-card">
+                    <i class="fa-solid fa-clock recap-icon"></i>
+                    <h3>Tiempo de Visualización</h3>
+                    <div class="stat-value">142 <span>horas</span></div>
+                    <p class="stat-compare positive">
+                        <i class="fa-solid fa-arrow-trend-up"></i> +12% más que el mes pasado
+                    </p>
+                </div>
+
+                <div class="recap-card">
+                    <i class="fa-solid fa-film recap-icon"></i>
+                    <h3>Género Favorito</h3>
+                    <div class="stat-value">Ciencia Ficción</div>
+                    <div class="percentile-box">
+                        <i class="fa-solid fa-trophy"></i> Estás en el <strong>top 3%</strong> de usuarios que más ven
+                        este género.
+                    </div>
+                </div>
+
+                <div class="recap-card">
+                    <i class="fa-solid fa-star recap-icon"></i>
+                    <h3>Actor Más Visto</h3>
+                    <div class="stat-value">Keanu Reeves</div>
+                    <p>Aparece en 4 películas que viste este mes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== LEADERBOARD VIEW ==================== -->
+        <section id="leaderboard-view" class="view">
+            <div class="leaderboard-container">
+                <div class="leaderboard-header">
+                    <h2>Ranking Global de <span class="highlight">Interación</span></h2>
+                    <p>Gana puntos interactuando en encuestas, trivia en vivo y watch parties. ¡Los mejores rangos
+                        desbloquean ventajas exclusivas!</p>
+                </div>
+
+                <div class="perks-grid">
+                    <div class="perk-card">
+                        <div class="perk-icon bronze"><i class="fa-solid fa-medal"></i></div>
+                        <h4>Rango Bronce</h4>
+                        <p>Avatar animado</p>
+                    </div>
+                    <div class="perk-card active-perk">
+                        <div class="perk-icon silver"><i class="fa-solid fa-medal"></i></div>
+                        <h4>Rango Plata</h4>
+                        <p>1 Alquiler Premium al mes</p>
+                    </div>
+                    <div class="perk-card locked">
+                        <div class="perk-icon gold"><i class="fa-solid fa-medal"></i></div>
+                        <h4>Rango Oro</h4>
+                        <p>Crear salas con Alquiler Premium gratis</p>
+                    </div>
+                    <div class="perk-card locked">
+                        <div class="perk-icon diamond"><i class="fa-solid fa-gem"></i></div>
+                        <h4>Rango Diamante</h4>
+                        <p>Acceso anticipado a estrenos</p>
+                    </div>
+                </div>
+
+                <div class="leaderboard-list">
+                    <div class="rank-item first">
+                        <div class="rank-number">1</div>
+                        <img src="https://ui-avatars.com/api/?name=Sarah&background=fbbf24&color=fff" alt="Avatar">
+                        <div class="rank-info">
+                            <strong>Sarah J.</strong>
+                            <span>Diamante</span>
+                        </div>
+                        <div class="rank-score"><i class="fa-solid fa-bolt"></i> 14,250</div>
+                    </div>
+                    <div class="rank-item second">
+                        <div class="rank-number">2</div>
+                        <img src="https://ui-avatars.com/api/?name=Mike&background=94a3b8&color=fff" alt="Avatar">
+                        <div class="rank-info">
+                            <strong>Mike T.</strong>
+                            <span>Diamante</span>
+                        </div>
+                        <div class="rank-score"><i class="fa-solid fa-bolt"></i> 13,800</div>
+                    </div>
+                    <div class="rank-item third">
+                        <div class="rank-number">3</div>
+                        <img src="https://ui-avatars.com/api/?name=Elena&background=b45309&color=fff" alt="Avatar">
+                        <div class="rank-info">
+                            <strong>Elena G.</strong>
+                            <span>Oro</span>
+                        </div>
+                        <div class="rank-score"><i class="fa-solid fa-bolt"></i> 12,100</div>
+                    </div>
+
+                    <div class="rank-divider">...</div>
+
+                    <div class="rank-item current-user">
+                        <div class="rank-number">142</div>
+                        <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="Tú">
+                        <div class="rank-info">
+                            <strong>Tú</strong>
+                            <span>Plata</span>
+                        </div>
+                        <div class="rank-score"><i class="fa-solid fa-bolt"></i> 2,450</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== STORE VIEW (NEW) ==================== -->
+        <section id="store-view" class="view">
+            <div class="store-header" style="text-align: center; margin-bottom: 2rem;">
+                <h2>Tienda de la <span class="badge">Plataforma</span></h2>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Compra créditos para interactuar o alquila
+                    estrenos VIP para tus Salas Públicas.</p>
+            </div>
+
+            <!-- Credits Shop -->
+            <h3 style="margin-bottom: 1rem; color: #fbcfe8;"><i class="fa-solid fa-coins"></i> Paquetes de Créditos</h3>
+            <div class="store-grid"
+                style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem;">
+                <!-- Pack 1 -->
+                <div class="store-item"
+                    style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 1.5rem; text-align: center; transition: transform 0.3s; cursor: pointer;">
+                    <div class="pack-icon" style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
+                    <h4 style="color: #cbd5e1; margin-bottom: 0.5rem;">Pack Básico</h4>
+                    <div class="pack-amount"
+                        style="font-weight: 600; font-size: 1.2rem; color: #fbcfe8; margin-bottom: 0.5rem;">500 Créditos
+                    </div>
+                    <div class="pack-price"
+                        style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 1.5rem;">4.99€</div>
+                    <button class="btn btn-secondary full-width mt-1" onclick="buyCredits(500)">Comprar</button>
+                </div>
+                <!-- Pack 2 -->
+                <div class="store-item popular-pack"
+                    style="background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1)); border: 1px solid #ec4899; border-radius: 16px; padding: 1.5rem; text-align: center; position: relative;">
+                    <div class="pack-banner"
+                        style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary-gradient); color: white; padding: 0.2rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
+                        Más Popular</div>
+                    <div class="pack-icon" style="font-size: 3rem; margin-bottom: 1rem;">💎</div>
+                    <h4 style="color: #cbd5e1; margin-bottom: 0.5rem;">Pack Avanzado</h4>
+                    <div class="pack-amount"
+                        style="font-weight: 600; font-size: 1.2rem; color: #fbcfe8; margin-bottom: 0.5rem;">1,200
+                        Créditos</div>
+                    <div class="pack-price"
+                        style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 1.5rem;">9.99€</div>
+                    <button class="btn btn-primary full-width mt-1" onclick="buyCredits(1200)">Comprar</button>
+                </div>
+                <!-- Pack 3 -->
+                <div class="store-item"
+                    style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 1.5rem; text-align: center;">
+                    <div class="pack-icon" style="font-size: 3rem; margin-bottom: 1rem;">👑</div>
+                    <h4 style="color: #cbd5e1; margin-bottom: 0.5rem;">Pack Ballena</h4>
+                    <div class="pack-amount"
+                        style="font-weight: 600; font-size: 1.2rem; color: #fbcfe8; margin-bottom: 0.5rem;">3,500
+                        Créditos</div>
+                    <div class="pack-price"
+                        style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 1.5rem;">24.99€</div>
+                    <button class="btn btn-secondary full-width mt-1" onclick="buyCredits(3500)">Comprar</button>
+                </div>
+            </div>
+
+            <!-- Premium Rentals -->
+            <h3 style="margin-bottom: 1rem; color: #fbcfe8;"><i class="fa-solid fa-film"></i> Alquileres VIP (Estrenos)
+            </h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem;">Compra un pase VIP y reprodúcelo en tus
+                Salas Globales para que hasta 200 personas la vean contigo gratis.</p>
+            <div class="movies-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
+                <!-- Rental 1 -->
+                <div class="movie-card"
+                    style="position: relative; overflow: hidden; border-radius: 12px; transition: transform 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                    <img style="width: 100%; height: 250px; object-fit: cover;"
+                        src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=300" alt="Movie">
+                    <div class="movie-info"
+                        style="padding: 1rem; background: rgba(0,0,0,0.8); position: absolute; bottom: 0; width: 100%;">
+                        <h4 style="font-size: 1rem;">Dune: Parte 3</h4>
+                        <span class="badge"
+                            style="background: rgba(236,72,153,0.2); color: #ec4899; margin: 0.5rem 0; display: inline-block;">Estreno</span>
+                        <button class="btn btn-primary full-width mt-1" style="font-size: 0.8rem; padding: 0.4rem;"
+                            onclick="buyRental()">Alquilar - 14.99€</button>
+                    </div>
+                </div>
+                <!-- Rental 2 -->
+                <div class="movie-card"
+                    style="position: relative; overflow: hidden; border-radius: 12px; transition: transform 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                    <img style="width: 100%; height: 250px; object-fit: cover;"
+                        src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=300" alt="Movie">
+                    <div class="movie-info"
+                        style="padding: 1rem; background: rgba(0,0,0,0.8); position: absolute; bottom: 0; width: 100%;">
+                        <h4 style="font-size: 1rem;">Interstellar 2</h4>
+                        <span class="badge"
+                            style="background: rgba(236,72,153,0.2); color: #ec4899; margin: 0.5rem 0; display: inline-block;">Exclusiva</span>
+                        <button class="btn btn-primary full-width mt-1" style="font-size: 0.8rem; padding: 0.4rem;"
+                            onclick="buyRental()">Alquilar - 12.99€</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SUBSCRIPTION PLANS VIEW ==================== -->
+        <section id="plans-view" class="view">
+            <div class="plans-header">
+                <h2>Elige tu plan de <span class="highlight">StreamSync</span></h2>
+                <p>Desbloquea la experiencia completa sin interrupciones o disfruta de ventajas adicionales.</p>
+            </div>
+
+            <div class="plans-grid">
+                <!-- Basic Plan -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Básico</h3>
+                        <div class="plan-price">€4.99<span>/mes</span></div>
+                        <p>Perfecto para empezar</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check feature-check"></i> Anuncios reducidos al inicio</li>
+                        <li><i class="fa-solid fa-check feature-check"></i> Calidad 1080p</li>
+                        <li><i class="fa-solid fa-check feature-check"></i> Salas colectivas privadas (hasta 5)</li>
+                        <li><i class="fa-solid fa-check feature-check"></i> Solo 1 pantalla</li>
+                        <li><i class="fa-solid fa-times feature-cross"></i> Sin Salas Globales Premium</li>
+                    </ul>
+                    <button class="btn btn-secondary full-width">Plan Actual</button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="plan-card popular-plan">
+                    <div class="popular-badge">MÁS POPULAR</div>
+                    <div class="plan-header">
+                        <h3>Premium</h3>
+                        <div class="plan-price">€9.99<span>/mes</span></div>
+                        <p>La experiencia definitiva</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check feature-check"></i> <strong>Cero anuncios</strong></li>
+                        <li><i class="fa-solid fa-check feature-check"></i> Calidad 4K HDR</li>
+                        <li><i class="fa-solid fa-check feature-check"></i> Salas colectivas ilimitadas</li>
+                        <li><i class="fa-solid fa-check feature-check"></i> 2 pantallas simultaneas</li>
+                        <li><i class="fa-solid fa-check feature-check"></i> 5 acceso VIP a Salas Globales</li>
+                    </ul>
+                    <button class="btn btn-primary full-width">Mejorar a Premium</button>
+                </div>
+
+                <!-- Ultimate Plan -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Familiar / Ultimate</h3>
+                        <div class="plan-price">€14.99<span>/mes</span></div>
+                        <p>Para toda la casa</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check feature-check"></i> Todo lo de Premium</li>
+                        <li><i class="fa-solid fa-check feature-check"></i> 500 creditos para reacciones</li>
+                        <li><i class="fa-solid fa-check feature-check"></i> 4 pantallas simultáneas</li>
+                        <li><i class="fa-solid fa-check feature-check"></i> Multiplicador x2 de Puntos (Top Global)</li>
+                        <li><i class="fa-solid fa-check feature-check"></i> Accesos y alquileres VIP Ilimitados</li>
+                    </ul>
+                    <button class="btn btn-secondary full-width">Seleccionar Ultimate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== WATCH PARTY VIEW ==================== -->
+        <section id="party-view" class="view">
+            <div class="party-container">
+                <div class="party-main" style="overflow-y: auto;">
+                    <h2>Salas Colectivas</h2>
+                    <p>Mira películas sincronizadas con tus amigos o únete a salas globales para ver estrenos premium
+                        gratis.</p>
+
+                    <div class="party-tabs">
+                        <button class="tab-btn active" onclick="switchPartyTab('private')">Salas Privadas
+                            (Amigos)</button>
+                        <button class="tab-btn" onclick="switchPartyTab('global')">Salas Globales (Públicas)</button>
+                    </div>
+
+                    <!-- Private Rooms Tab -->
+                    <div id="private-rooms-tab" class="party-tab-content active">
+                        <div class="party-actions">
+                            <button class="btn btn-primary" onclick="createRoom()">
+                                <i class="fa-solid fa-plus"></i> Crear Sala
+                            </button>
+                            <div class="join-room">
+                                <input type="text" placeholder="Código de la sala (Ej: A7X9)">
+                                <button class="btn btn-secondary">Unirse</button>
+                            </div>
+                        </div>
+
+                        <div id="room-lobby" class="room-lobby hidden">
+                            <div class="room-header"
+                                style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                                <div>
+                                    <h3>Sala de User <span class="badge">Host</span></h3>
+                                    <span class="room-code">Código: <strong>X7K2P</strong></span>
+                                </div>
+                                <div class="party-video-selector"
+                                    style="background: rgba(255,255,255,0.05); padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--surface-border);">
+                                    <label for="party-video-select"
+                                        style="font-size: 0.85rem; color: var(--text-muted); margin-right: 0.5rem;">Elegir
+                                        Video:</label>
+                                    <select id="party-video-select"
+                                        style="background: var(--bg-color); color: white; border: 1px solid var(--primary); padding: 0.3rem; border-radius: 4px; outline: none;">
+                                        <option value="video1/video.mpd">WingIT</option>
+                                        <option value="video2/video.mpd">Glass Half</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Mini Player for Effects Preview -->
+                            <div class="mini-player-preview" id="mini-player-preview"
+                                style="position: relative; background: #000; overflow: hidden;">
+                                <video id="party-video-player"
+                                    style="width: 100%; height: 100%; object-fit: cover; display: none;" controls>
+                                </video>
+                                <div class="preview-overlay" id="party-preview-overlay">
+                                    <i class="fa-solid fa-play preview-icon"></i>
+                                    <span style="font-size: 0.9rem; margin-top: 0.5rem; color: #cbd5e1;">Pantalla de
+                                        prueba (Lanza algo para ver el efecto)</span>
+                                </div>
+                            </div>
+
+                            <div class="users-grid" id="private-users-grid">
+                                <div class="user-slot active-user" id="user-slot-1"
+                                    onclick="selectUserForReaction('user-slot-1')">
+                                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff"
+                                        alt="Host">
+                                    <span>Tú (Host)</span>
+                                    <span class="status ready">Listo</span>
+                                </div>
+                                <div class="user-slot active-user" id="user-slot-2"
+                                    onclick="selectUserForReaction('user-slot-2')">
+                                    <img src="https://ui-avatars.com/api/?name=Alex&background=ec4899&color=fff"
+                                        alt="Alex">
+                                    <span>Alex</span>
+                                    <span class="status ready">Listo</span>
+                                </div>
+                                <div class="user-slot empty">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                    <span>Invitar</span>
+                                </div>
+                                <div class="user-slot empty">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                    <span>Invitar</span>
+                                </div>
+                            </div>
+
+                            <!-- Paid Reactions Panel -->
+                            <div class="reactions-panel mt-1">
+                                <div class="reactions-header">
+                                    <h4><i class="fa-solid fa-wand-magic-sparkles"></i> Trolleo y Reacciones (Sala
+                                        Estándar)</h4>
+                                    <span class="badge"
+                                        style="background: rgba(236,72,153,0.2); color: #fbcfe8; border: 1px solid #ec4899;">Créditos:
+                                        <span id="reaction-credits-display">150</span></span>
+                                </div>
+                                <p style="font-size: 0.85rem; margin-bottom: 1rem; color: #94a3b8;">Selecciona a un
+                                    jugador arriba y tírale algo a su pantalla durante la peli. (No aplicable en salas
+                                    Premium/Estrenos).</p>
+                                <div class="reactions-actions">
+                                    <button class="reaction-btn" onclick="throwReaction('tomato', 10)" disabled
+                                        id="btn-react-1">
+                                        <div class="emoji">🍅</div>
+                                        <div class="cost">10 Cr.</div>
+                                    </button>
+                                    <button class="reaction-btn" onclick="throwReaction('water', 25)" disabled
+                                        id="btn-react-2">
+                                        <div class="emoji">💦</div>
+                                        <div class="cost">25 Cr.</div>
+                                    </button>
+                                    <button class="reaction-btn" onclick="throwReaction('pie', 50)" disabled
+                                        id="btn-react-3">
+                                        <div class="emoji">🥧</div>
+                                        <div class="cost">50 Cr.</div>
+                                    </button>
+                                    <button class="reaction-btn epic-reaction" onclick="throwReaction('flashbang', 100)"
+                                        disabled id="btn-react-4">
+                                        <div class="emoji">💫</div>
+                                        <div class="cost">Cegadora (100)</div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary full-width" style="margin-top: 2rem;"
+                                onclick="startPartyPlayback()">
+                                <i class="fa-solid fa-play"></i> Iniciar Película Sincronizada
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Global Rooms Tab -->
+                    <div id="global-rooms-tab" class="party-tab-content" style="display: none;">
+                        <div class="alert-box discount-alert">
+                            <i class="fa-solid fa-lock-keyhole"></i>
+                            <div>
+                                <strong>¡Estrenos Premium Gratis!</strong>
+                                <p>Únete a las salas globales programadas para desbloquear y ver películas de pago sin
+                                    coste adicional. Aforo limitado (200 personas max).</p>
+                            </div>
+                        </div>
+
+                        <div class="global-rooms-list">
+                            <!-- Global Room 1 -->
+                            <div class="global-room-card active-event">
+                                <div class="room-banner"
+                                    style="background: linear-gradient(to right, rgba(0,0,0,0.8), transparent), url('sintel.jpg'); background-size: cover;">
+                                    <span class="badge premium-badge"><i class="fa-solid fa-crown"></i> Premium
+                                        Bloqueado</span>
+                                </div>
+                                <div class="global-room-info">
+                                    <div class="info-header">
+                                        <h3>Sintel (Exclusivo) - Ver Trailer</h3>
+                                        <div class="capacity">
+                                            <i class="fa-solid fa-users"></i> <span
+                                                class="count highlight">184/200</span>
+                                        </div>
+                                    </div>
+                                    <p class="status-live"><i class="fa-solid fa-circle-dot live-icon"></i> En directo
+                                        ahora (Comenzó hace 15 min)</p>
+                                    <button class="btn btn-primary full-width mt-1"
+                                        onclick="openPlayer('output/sintel.mpd')"><i
+                                            class="fa-solid fa-right-to-bracket"></i>
+                                        Mejora tu plan - Ver Trailer</button>
+                                </div>
+                            </div>
+
+                            <!-- Global Room 2 -->
+                            <div class="global-room-card upcoming-event">
+                                <div class="room-banner"
+                                    style="background: linear-gradient(to right, rgba(0,0,0,0.8), transparent), url('https://images.unsplash.com/photo-1535016120720-40c746a65652?q=80&w=800'); background-size: cover; filter: grayscale(50%);">
+                                    <span class="badge upcoming-badge"><i class="fa-regular fa-clock"></i> Comienza a
+                                        las 22:00</span>
+                                </div>
+                                <div class="global-room-info">
+                                    <div class="info-header">
+                                        <h3>Oppenheimer</h3>
+                                        <div class="capacity">
+                                            <i class="fa-solid fa-users"></i> <span class="count">0/200</span>
+                                        </div>
+                                    </div>
+                                    <p class="status-upcoming">Sala de espera abierta</p>
+                                    <button class="btn btn-secondary full-width mt-1"><i class="fa-regular fa-bell"></i>
+                                        Avisarme</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="party-chat">
+                    <div class="chat-header">
+                        <h3>Chat de Sala</h3>
+                        <span>2 online</span>
+                    </div>
+                    <div class="chat-messages">
+                        <div class="message">
+                            <strong>El servidor:</strong> Bienvenidos a la sala.
+                        </div>
+                        <div class="message">
+                            <strong>Alex:</strong> Hola! Qué película vemos hoy?
+                        </div>
+                        <div class="message self">
+                            <strong>Tú:</strong> Ponemos Alien?
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" placeholder="Escribe un mensaje...">
+                        <button><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PROFILE VIEW ==================== -->
+        <section id="profile-view" class="view">
+            <div class="profile-header-card">
+                <div class="profile-cover"></div>
+                <div class="profile-info-block">
+                    <div class="profile-avatar-wrapper">
+                        <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="User">
+                        <button class="btn-edit-avatar"><i class="fa-solid fa-camera"></i></button>
+                    </div>
+                    <div class="profile-text">
+                        <h2>User Name <span class="badge premium-badge" style="font-size:0.7rem;"><i
+                                    class="fa-solid fa-crown"></i> Plata</span></h2>
+                        <p>@stream_user • Miembro desde 2024</p>
+                    </div>
+                    <div class="profile-actions-top">
+                        <button class="btn btn-secondary" onclick="editProfile()"><i class="fa-solid fa-pen"></i> Editar
+                            Perfil</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-stats-grid">
+                <div class="stat-box">
+                    <i class="fa-solid fa-clock stat-icon" style="color: #6366f1;"></i>
+                    <div class="stat-content">
+                        <h4>142h</h4>
+                        <p>Vistas este mes</p>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <i class="fa-solid fa-bolt stat-icon" style="color: #fbbf24;"></i>
+                    <div class="stat-content">
+                        <h4>2,450</h4>
+                        <p>Puntos de Interacción</p>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <i class="fa-solid fa-user-group stat-icon" style="color: #ec4899;"></i>
+                    <div class="stat-content">
+                        <h4>24</h4>
+                        <p>Amigos</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title mt-2">Logros Recientes</h3>
+            <div class="achievements-list">
+                <div class="achievement-card">
+                    <div class="ach-icon"><i class="fa-solid fa-fire"></i></div>
+                    <div class="ach-info">
+                        <h4>Maratón de Finde</h4>
+                        <p>Viste 5 películas seguidas</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <div class="ach-icon"><i class="fa-solid fa-comment-dots"></i></div>
+                    <div class="ach-info">
+                        <h4>Crítico de Cine</h4>
+                        <p>Reaccionaste 100 veces</p>
+                    </div>
+                </div>
+                <div class="achievement-card locked">
+                    <div class="ach-icon"><i class="fa-solid fa-lock"></i></div>
+                    <div class="ach-info">
+                        <h4>Host Perfecto</h4>
+                        <p>Crea 10 salas (5/10)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FRIENDS VIEW ==================== -->
+        <section id="friends-view" class="view">
+            <div class="friends-layout">
+                <div class="friends-sidebar">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Buscar amigos...">
+                    </div>
+                    <ul class="friend-categories">
+                        <li class="active">Todos (24)</li>
+                        <li>En línea (3)</li>
+                        <li>Solicitudes <span class="badge"
+                                style="background:#ef4444; color:white; border:none; padding:4px 8px;">2</span></li>
+                    </ul>
+                </div>
+
+                <div class="friends-main">
+                    <div class="friends-header-actions">
+                        <h3>Amigos en línea</h3>
+                        <button class="btn btn-primary" onclick="addFriend()"
+                            style="padding: 0.5rem 1rem; font-size:0.9rem;"><i class="fa-solid fa-user-plus"></i> Añadir
+                            Amigo</button>
+                    </div>
+
+                    <div class="friends-grid-list">
+                        <!-- Friend 1 -->
+                        <div class="friend-card">
+                            <div class="friend-status-indicator online"></div>
+                            <img src="https://ui-avatars.com/api/?name=Alex&background=ec4899&color=fff" alt="Alex">
+                            <div class="friend-details">
+                                <h4>Alex</h4>
+                                <p>Viendo <em>Cyber City 2099</em></p>
+                            </div>
+                            <div class="friend-actions">
+                                <button class="icon-btn tooltip" onclick="actionFriend('Unirse a partida')"
+                                    title="Unirse a partida"><i class="fa-solid fa-right-to-bracket"></i></button>
+                                <button class="icon-btn tooltip" onclick="actionFriend('Enviar Mensaje')"
+                                    title="Mensaje"><i class="fa-solid fa-message"></i></button>
+                            </div>
+                        </div>
+                        <!-- Friend 2 -->
+                        <div class="friend-card">
+                            <div class="friend-status-indicator online"></div>
+                            <img src="https://ui-avatars.com/api/?name=Sarah&background=fbbf24&color=fff" alt="Sarah">
+                            <div class="friend-details">
+                                <h4>Sarah J.</h4>
+                                <p>En el Menú Principal</p>
+                            </div>
+                            <div class="friend-actions">
+                                <button class="icon-btn tooltip" onclick="actionFriend('Invitar a Sala')"
+                                    title="Invitar a Sala"><i class="fa-solid fa-plus"></i></button>
+                                <button class="icon-btn tooltip" onclick="actionFriend('Enviar Mensaje')"
+                                    title="Mensaje"><i class="fa-solid fa-message"></i></button>
+                            </div>
+                        </div>
+                        <!-- Friend 3 -->
+                        <div class="friend-card offline">
+                            <div class="friend-status-indicator offline-dot"></div>
+                            <img src="https://ui-avatars.com/api/?name=Mike&background=94a3b8&color=fff" alt="Mike">
+                            <div class="friend-details">
+                                <h4>Mike T.</h4>
+                                <p>Última vez hace 2h</p>
+                            </div>
+                            <div class="friend-actions">
+                                <button class="icon-btn tooltip" onclick="actionFriend('Ver Perfil de Amigo')"
+                                    title="Ver Perfil"><i class="fa-solid fa-user"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SETTINGS VIEW ==================== -->
+        <section id="settings-view" class="view">
+            <div class="settings-layout">
+                <div class="settings-sidebar">
+                    <ul>
+                        <li class="active"><i class="fa-solid fa-user-gear" style="width:20px;"></i> Cuenta</li>
+                        <li><i class="fa-solid fa-eye-slash" style="width:20px;"></i> Privacidad</li>
+                        <li><i class="fa-solid fa-tv" style="width:20px;"></i> Reproductor</li>
+                        <li><i class="fa-solid fa-bell" style="width:20px;"></i> Notificaciones</li>
+                        <li><i class="fa-solid fa-shield-halved" style="width:20px;"></i> Seguridad</li>
+                    </ul>
+                </div>
+
+                <div class="settings-content-area">
+                    <h3>Configuración de Cuenta</h3>
+
+                    <div class="settings-group">
+                        <h4 class="settings-h4">Detalles Personales</h4>
+                        <div class="form-group">
+                            <label>Nombre de Usuario</label>
+                            <input type="text" value="User Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input type="email" value="user@streamsync.com" disabled>
+                            <span class="field-hint">Para cambiar el correo, verifica tu identidad primero.</span>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h4 class="settings-h4">Preferencias de Reproducción</h4>
+                        <div class="toggle-row">
+                            <div class="toggle-info">
+                                <strong>Reproducción Automática</strong>
+                                <p>Reproducir el siguiente episodio automáticamente.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-row">
+                            <div class="toggle-info">
+                                <strong>Omitir Intros automáticamente</strong>
+                                <p>Ahorra tiempo al ver series.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label>Calidad por defecto</label>
+                            <select class="settings-select">
+                                <option>Automática (Recomendada)</option>
+                                <option>4K Ultra HD</option>
+                                <option>1080p HD</option>
+                                <option>720p</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-actions-bottom">
+                        <button class="btn btn-secondary"
+                            onclick="showToast('Cambios descartados.', 'info')">Descartar</button>
+                        <button class="btn btn-primary" onclick="saveSettings()">Guardar Cambios</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global Toast Container for Interactivity Feedback -->
+    <div id="toast-container"
+        style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;">
+    </div>
+
+    <!-- Shaka Player Dependency -->
+    <script src="shaka-player.compiled.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
